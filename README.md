@@ -30,9 +30,12 @@ pip install -r requirements.txt
 
 2. Create a .env file in the project root:
 
+```
 SENDER_EMAIL=your_email@gmail.com
 EMAIL_PASSWORD=your_app_password
 RECEIVER_EMAIL=receiver_email@gmail.com
+
+```
 
 3. Run the script:
 
