@@ -92,3 +92,13 @@ except Exception as e:
 print(df)
 
 #commit: map Fed XML items to structured dataframe schema
+
+# Export DataFrame to Excel
+try:
+  df.to_excel("web_scraper_report_generator/reports/fed_news.xlsx",
+              index=False)
+except Exception as e:
+  logging.error(f"Excel export failed: {e}")
+  exit(1)
+
+# commit: generate Excel report from Fed dataframe
