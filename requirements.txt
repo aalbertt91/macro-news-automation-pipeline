@@ -1,0 +1,5 @@
+pandas
+requests
+selenium
+openpyxl
+python-dotenv
