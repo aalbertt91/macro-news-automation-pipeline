@@ -102,3 +102,59 @@ except Exception as e:
   exit(1)
 
 # commit: generate Excel report from Fed dataframe
+
+# EMAIL SENDING
+# SMTP configuration
+SMTP_SERVER = "smtp.gmail.com"
+SMTP_PORT = 587
+
+EXCEL_PATH = "web_scraper_report_generator/reports/fed_news.xlsx"
+
+# Create email message
+try:
+  msg = EmailMessage()
+  msg["From"] = SENDER_EMAIL
+  msg["To"] = RECEIVER_EMAIL
+  msg["Subject"] = "Fed Press Releases – Latest 10 Updates"
+
+  msg.set_content("""
+Hi,
+
+Please find attached the latest Federal Reserve press releases report.
+
+The attached Excel file includes the 10 most recent items from the Fed’s official XML feed, including publication date, category, title, link, and description.
+
+Best regards,
+Alper
+""")
+except Exception as e:
+  logging.error(f"Email message creation failed: {e}")
+  exit(1)
+
+# Attach Excel file
+file_path = Path(EXCEL_PATH)
+
+try:
+  with open(file_path, "rb") as f:
+    msg.add_attachment(
+        f.read(),
+        maintype="application",
+        subtype="vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+        filename=file_path.name)
+except Exception as e:
+  logging.error(f"Attachment failed: {e}")
+  exit(1)
+
+# Send email via SMTP
+try:
+  with smtplib.SMTP(SMTP_SERVER, SMTP_PORT) as server:
+    server.starttls()
+    server.login(SENDER_EMAIL, APP_PASSWORD)
+    server.send_message(msg)
+except Exception as e:
+  logging.error(f"Email sending failed: {e}")
+  exit(1)
+
+print("📧 Email sent successfully!")
+
+# commit: add automated email delivery with Excel attachment
