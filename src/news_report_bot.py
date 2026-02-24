@@ -32,7 +32,7 @@ if not SENDER_EMAIL or not APP_PASSWORD or not RECEIVER_EMAIL:
   )
   exit(1)
 
-# commit : project setup with requirements gitignore and environment template
+
 
 # Federal Reserve XML feed URL
 url = "https://www.federalreserve.gov/feeds/press_all.xml"
@@ -80,7 +80,7 @@ else:
   logging.error(f"Connection error: {response.status_code}")
   exit(1)
 
-#commit: implement Fed XML feed fetch and parsing logic
+
 
 # Convert data to DataFrame
 try:
@@ -91,7 +91,7 @@ except Exception as e:
 
 print(df)
 
-#commit: map Fed XML items to structured dataframe schema
+
 
 # Export DataFrame to Excel
 try:
@@ -101,7 +101,7 @@ except Exception as e:
   logging.error(f"Excel export failed: {e}")
   exit(1)
 
-# commit: generate Excel report from Fed dataframe
+
 
 # EMAIL SENDING
 # SMTP configuration
@@ -157,4 +157,5 @@ except Exception as e:
 
 print("📧 Email sent successfully!")
 
-# commit: add automated email delivery with Excel attachment
+
+
