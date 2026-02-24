@@ -81,3 +81,14 @@ else:
   exit(1)
 
 #commit: implement Fed XML feed fetch and parsing logic
+
+# Convert data to DataFrame
+try:
+  df = pd.DataFrame(news_list)
+except Exception as e:
+  logging.error(f"DataFrame creation failed: {e}")
+  exit(1)
+
+print(df)
+
+#commit: map Fed XML items to structured dataframe schema
